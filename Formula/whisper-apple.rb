@@ -10,15 +10,19 @@ class WhisperApple < Formula
   def install
     system "swift", "build", "--disable-sandbox", "-c", "release"
 
-    # Copy bundled xcframework dylibs alongside the binary
+    bin.install ".build/release/whisper" => "whisper-apple"
+
+    # Copy bundled xcframework dylibs to libexec
     frameworks = %w[sndfile mpc ogg wavpack lame mpg123 opus FLAC vorbis tta-cpp]
     frameworks.each do |fw|
       fw_path = ".build/release/#{fw}.framework"
       next unless File.directory?(fw_path)
-      cp_r fw_path, bin/"#{fw}.framework"
+      (libexec/"#{fw}.framework").mkpath
+      cp_r Dir["#{fw_path}/*"], libexec/"#{fw}.framework"
     end
 
-    bin.install ".build/release/whisper" => "whisper-apple"
+    # Add rpath so binary finds frameworks in libexec
+    system "install_name_tool", "-add_rpath", libexec.to_s, bin/"whisper-apple"
   end
 
   test do
