@@ -1,8 +1,8 @@
 class WhisperApple < Formula
   desc "Local speech-to-text CLI using Apple SpeechAnalyzer (macOS 26+)"
-  homepage "https://github.com/liqichao/Whisper"
-  url "https://github.com/liqichao/Whisper/archive/refs/tags/v1.0.0.tar.gz"
-  sha256 "cbb866af58c7f5253ffe6798cf7562fd744efb78132055fb4de6b6c78e089224"
+  homepage "https://github.com/liqichao/whisper-apple"
+  url "https://github.com/liqichao/whisper-apple/archive/refs/tags/v1.0.0.tar.gz"
+  sha256 "e553cdf84237b407fae82d8801a745a118cd8b7fa864afbfb84a7cbf17c76168"
   license "MIT"
 
   depends_on macos: :tahoe
